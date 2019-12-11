@@ -6,43 +6,47 @@ class Game
   end
 
   def start_game
-    # start by printing the board
-    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
-    # loop through until the game was won or tied
+    # Primeiro print do board
+    board_print
+    # Loop até o jogo ser ganho ou empatado
     until game_is_over(@board) || tie(@board)
       puts "Enter the position:"
       if !get_human_spot
         get_human_spot
       end
       #Jogada do humano
-      puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+      board_print
       puts "-------------------------------------------------"
       if !game_is_over(@board) && !tie(@board)
         eval_board
         #Jogada do computador
-        puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+        board_print
         puts "-------------------------------------------------"
       end
     end
     endgame
   end
 
-    def endgame
-      puts "Do you want to play again?\n(Use \"y\" for yes or \"n\" for no)"
-      @answer = gets.chomp()
-      if @answer=="y"
-        initialize
-        start_game
-        sleep(1)
-      elsif @answer=="n"
-        puts "Thanks for playing, bye"
-        sleep(1)
-      else
-        puts "Invalid input, try again"
-        sleep(1)
-        endgame
-      end
+  def board_print
+    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+  end
+
+  def endgame
+    puts "Do you want to play again?\n(Use \"y\" for yes or \"n\" for no)"
+    @answer = gets.chomp()
+    if @answer=="y"
+      initialize
+      start_game
+      sleep(1)
+    elsif @answer=="n"
+      puts "Thanks for playing, bye"
+      sleep(1)
+    else
+      puts "Invalid input, try again"
+      sleep(1)
+      endgame
     end
+  end
 
   def get_human_spot
     spot = nil
